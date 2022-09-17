@@ -5,6 +5,10 @@ import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { setColor } from "../store/features/dragAndDropSlice";
 import { ItemTypes } from "../utils/constants";
+import ColorDragLayer from "./ColorDragLayer";
+
+// Modernizr
+const Modernizr = window.Modernizr;
 
 // Components
 const Container = ({ id, acceptedResolutions, name, color, big }) => {
@@ -37,11 +41,23 @@ const Container = ({ id, acceptedResolutions, name, color, big }) => {
 		})
 	}));
 
-	// Return
+	// Returns
+	if (Modernizr.touchevents){
+		return(
+			<React.Fragment>
+				<Wrapper ref={ drop } color={ color } big={ big } canDrop={ canDrop }>
+					{ name }
+				</Wrapper>
+				<ColorDragLayer/>
+			</React.Fragment>
+		);
+	}
 	return(
-		<Wrapper ref={ drop } color={ color } big={ big } canDrop={ canDrop }>
-			{ name }
-		</Wrapper>
+		<React.Fragment>
+			<Wrapper ref={ drop } color={ color } big={ big } canDrop={ canDrop }>
+				{ name }
+			</Wrapper>
+		</React.Fragment>
 	);
 
 };
@@ -56,6 +72,8 @@ const Wrapper = styled.article`
 	border: ${ ({ canDrop }) => {
 		if (canDrop){
 			return '4px solid var(--blue)';
+		} else {
+			return '4px solid transparent';
 		}
 	} };
 	color: ${ ({ color }) => {
@@ -64,6 +82,7 @@ const Wrapper = styled.article`
 		}
 		return 'white';
 	} };
+	user-select: none;
 	&:last-of-type{
 		margin: 0;
 	}

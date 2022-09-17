@@ -37,6 +37,8 @@ const Wrapper = styled.div`
 	background-color: ${ (props) => props.color };
 	opacity: ${ (props) => props.isDragging ? 0.5 : 1 };
 	cursor: move;
+	touch-action: none;
+	user-select: none;
 	&:last-of-type{
 		margin: 0;
 	}

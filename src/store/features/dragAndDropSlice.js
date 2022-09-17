@@ -3,8 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Initial state
 const initialState = {
-	// Is touch ?
-	isTouch:false,
 	// Draggable color box
 	colorBoxes:[
 		{ id:1, color:'#00bceb', resolution:'4K' },
@@ -25,10 +23,6 @@ const dragAndDropSlice = createSlice({
 	name:'dragAndDrop',
 	initialState,
 	reducers:{
-		// Is touch
-		setIsTouch:(state) => {
-			state.isTouch = true;
-		},
 		// Set color to container
 		setColor:(state, { payload }) => {
 			const { containerID, color } = payload;
@@ -45,7 +39,7 @@ const dragAndDropSlice = createSlice({
 });
 
 // Actions export
-export const { setIsTouch, setColor } = dragAndDropSlice.actions;
+export const { setColor } = dragAndDropSlice.actions;
 
 // Reducer export
 export default dragAndDropSlice.reducer;

@@ -36,6 +36,8 @@ const Wrapper = styled.aside`
 	align-items: center;
 	background-color: var(--gray0);
 	box-shadow: 0 0 10px rgba(0,0,0,0.4);
+	touch-action: none;
+	z-index: 999;
 	@media only screen and (min-width: 768px){
 		height: 150px;
 	}
